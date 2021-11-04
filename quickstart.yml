@@ -65,7 +65,7 @@ services:
       - HYDRA_ADMIN_URL=http://hydra:4445
     image: oryd/hydra-login-consent-node:v1.10.6
     ports:
-      - "3000:3000"
+      - "23000:3000"
     restart: unless-stopped
     networks:
       - intranet
