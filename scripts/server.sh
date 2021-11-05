@@ -2,17 +2,22 @@
 set -e
 cd ~/hydra
 
-export SECRETS_SYSTEM=47DF5E39-00B0-4357-8C29-ACD07031C8BE
+#export SECRETS_SYSTEM=47DF5E39-00B0-4357-8C29-ACD07031C8BE
+export LOG_LEAK_SENSITIVE_VALUES=true
 CONTAINER_PREFIX=hydra_
 cleanup_cmd="docker ps --filter name='$CONTAINER_PREFIX*' -aq|xargs docker rm -f"
-
+[[ -d /var/spool/hydra-sqlite/1 ]] || mkdir -p /var/spool/hydra-sqlite/1
+DEBUG_MODE=${DEBUG_MODE:-1}
 DB=${DB:-postgres}
-DB=mysql
 DB=sqlite
+DB=mysql
 TRACING=${TRACING:-true}
 PROMETHEUS=${PROMETHEUS:-false}
 
 DC="docker-compose -f quickstart.yml"
+if [[ $DEBUG_MODE == "1" ]]; then
+  DC+=" -f quickstart-debug.yml"
+fi
 if [[ $DB == "mysql" ]]; then
   DC+=" -f quickstart-mysql.yml"
 fi

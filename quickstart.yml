@@ -30,6 +30,11 @@ services:
         read_only: false
       -
         type: bind
+        source: /var/spool/hydra-sqlite/1
+        target: /var/lib/sqlite.fs
+        read_only: false
+      -
+        type: bind
         source: ./contrib/quickstart/5-min
         target: /etc/config/hydra
     environment:
