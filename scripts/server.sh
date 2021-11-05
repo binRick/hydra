@@ -7,7 +7,8 @@ CONTAINER_PREFIX=hydra_
 cleanup_cmd="docker ps --filter name='$CONTAINER_PREFIX*' -aq|xargs docker rm -f"
 
 DB=${DB:-postgres}
-DB=${DB:-mysql}
+DB=mysql
+DB=sqlite
 TRACING=${TRACING:-true}
 PROMETHEUS=${PROMETHEUS:-false}
 
@@ -34,7 +35,9 @@ kill_containers() {
     ansi >&2 --yellow --italic --bg-black "$cleanup_cmd"
     eval $cleanup_cmd
 
-  ) 2>/dev/null
+  ) 2>/dev/null &
+
+  wait
 }
 
 trap kill_containers EXIT

@@ -6,11 +6,17 @@ global_options:
   default-command: /bin/bash
 windows:
 - shell_command_before:
-    - cd ~/hydra
-  layout: main-vertical
+    - cd ~/hydra/scripts
+  layout: main-horizontal
   options:
-    main-pane-height: 25
+    main-pane-height: 15
   panes:
-    - sh -c 'while :; do clear && date && sleep 3600 && date; done'
+    - sh -c 'while :; do clear && docker stats; sleep 5; done'
     - sh -c 'while :; do clear && ./dev.sh ./server.sh && sleep 3600 && date; done'
+    - sh -c 'while :; do clear && docker events; sleep 5; done'
+    - sh -c 'while :; do clear && ./get_container_ports.sh && date; sleep 5; done'
+    - sh -c 'while :; do clear && ./webapp.sh && date; sleep 5; done'
+    - sh -xc '[[ -f /r1 ]] && unlink /r1; sleep 5; while :; do clear && date; ./wait-for-it.sh -h 127.0.0.1 -p 4444 && echo CLIENT READY && touch /r1 && sleep 3; sleep 1; done'
+    - sh -xc '[[ -f /r1 ]] && unlink /r1; sleep 5; while :; do clear && date; ./wait-for-it.sh -h 127.0.0.1 -p 4445 && echo CLIENT READY && touch /r1 && sleep 3; sleep 1; done'
+
 #    - sh -c 'while :; do clear && ./server.sh && sleep 3600 && date; done'
