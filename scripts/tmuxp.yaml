@@ -1,0 +1,16 @@
+---
+session_name: OAuth Dev
+start_directory: ~/hydra
+global_options:
+  default-shell: /bin/bash
+  default-command: /bin/bash
+windows:
+- shell_command_before:
+    - cd ~/hydra
+  layout: main-vertical
+  options:
+    main-pane-height: 25
+  panes:
+    - sh -c 'while :; do clear && date && sleep 3600 && date; done'
+    - sh -c 'while :; do clear && ./dev.sh ./server.sh && sleep 3600 && date; done'
+#    - sh -c 'while :; do clear && ./server.sh && sleep 3600 && date; done'

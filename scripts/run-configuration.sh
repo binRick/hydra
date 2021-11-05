@@ -2,16 +2,16 @@
 
 set -Eeuxo pipefail
 
-cd "$( dirname "${BASH_SOURCE[0]}" )/.."
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-cat > configuration.md << EOF
+cat >configuration.md <<EOF
 ---
 id: configuration
 title: Configuration
 ---
 
 \`\`\`yaml
-`cat ./docs/config.yaml`
+$(cat ./docs/config.yaml)
 \`\`\`
 
 EOF

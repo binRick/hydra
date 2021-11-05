@@ -39,4 +39,5 @@ kill_containers() {
 
 trap kill_containers EXIT
 
+eval "$cleanup_cmd" 2>/dev/null || true
 eval "$DC"

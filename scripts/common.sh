@@ -1,0 +1,6 @@
+set -e
+
+export SECRETS_SYSTEM=47DF5E39-00B0-4357-8C29-ACD07031C8BE
+export CONTAINER_PREFIX=hydra_
+
+cd ~/hydra
